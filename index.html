@@ -13,15 +13,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
   <!-- Custom Styles -->
   <link href="styles.css" rel="stylesheet" />
-
-
+  <style>
+    .hero h1 {
+      font-size: clamp(1.5rem, 5vw, 3.5rem);
+      text-align: center;
+      width: 100%;
+    }
+    .brand-name {
+      white-space: nowrap;
+      display: inline-block;
+    }
+    @media (max-width: 768px) {
+      .hero h1 {
+        padding: 0;
+        margin-left: -10px;
+        line-height: 1.2;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 fixed-top">
     <a class="navbar-brand" href="#" style="padding:0 12px 0 0;">
-      <img src="new-logo.png" alt="Charismatic.AI Logo" style="width:280px;height:90px;object-fit:contain;display:block;" />
+      <img src="new-logo.png" alt="Charismatic.AI Logo" style="width:320px;height:90px;object-fit:contain;display:block;" />
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,9 +65,9 @@
   <!-- Hero Section -->
   <section class="hero hero-index">
     <div class="hero-content">
-  <h1>Welcome to Charismatic.AI</h1>
-  <h2>Empowering your business with engaging and entertaining story content, using amazing personalised AI choices.</h2>
-  <button class="cta-btn" id="demo-btn">See Story Chatbot Demo - <span style="font-style:italic;">*Coming Soon*</span></button>
+      <h1>Welcome to <span class="brand-name">Charismatic.AI</span></h1>
+      <h2>Empowering your business with engaging and entertaining story content, using amazing personalised AI choices.</h2>
+      <button class="cta-btn" id="demo-btn">See Story Chatbot Demo - <span style="font-style:italic;">*Coming Soon*</span></button>
     </div>
   </section>
 
@@ -108,5 +124,4 @@
   <!-- Custom Scripts -->
   <script src="main.js"></script>
 </body>
-
 </html>

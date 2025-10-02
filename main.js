@@ -213,7 +213,140 @@ function handleDOMContentLoaded() {
   setTimeout(ensureShowcaseVisible, 500);
 }
 
+// ========================================
+// CONTACT FORM FUNCTIONALITY
+// ========================================
+
+// Contact form validation and submission
+function initContactForm() {
+  const contactForm = document.getElementById('contactForm');
+  if (!contactForm) return;
+
+  contactForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    // Remove previous validation classes
+    contactForm.classList.remove('was-validated');
+    
+    // Validate form
+    if (contactForm.checkValidity()) {
+      // Form is valid, simulate submission
+      handleFormSubmission(contactForm);
+    } else {
+      // Form is invalid, show validation messages
+      contactForm.classList.add('was-validated');
+    }
+  });
+
+  // Real-time validation for better UX
+  const formInputs = contactForm.querySelectorAll('input, select, textarea');
+  formInputs.forEach(input => {
+    input.addEventListener('blur', function() {
+      if (this.checkValidity()) {
+        this.classList.remove('is-invalid');
+        this.classList.add('is-valid');
+      } else {
+        this.classList.remove('is-valid');
+        this.classList.add('is-invalid');
+      }
+    });
+
+    input.addEventListener('input', function() {
+      if (this.classList.contains('is-invalid') && this.checkValidity()) {
+        this.classList.remove('is-invalid');
+        this.classList.add('is-valid');
+      }
+    });
+  });
+}
+
+// Handle form submission
+function handleFormSubmission(form) {
+  const submitButton = form.querySelector('button[type="submit"]');
+  const originalButtonText = submitButton.innerHTML;
+  const messagesContainer = document.getElementById('form-messages');
+
+  // Show loading state
+  submitButton.disabled = true;
+  submitButton.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Sending...';
+
+  // Simulate form submission (replace with actual API call)
+  setTimeout(() => {
+    // Get form data
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    // In a real application, you would send this data to your server
+    console.log('Contact form data:', data);
+
+    // Show success message
+    showFormMessage('success', 'Thank you for your message! We\'ll get back to you within 24 hours.');
+    
+    // Reset form
+    form.reset();
+    form.classList.remove('was-validated');
+    
+    // Remove validation classes
+    const formInputs = form.querySelectorAll('input, select, textarea');
+    formInputs.forEach(input => {
+      input.classList.remove('is-valid', 'is-invalid');
+    });
+
+    // Reset button
+    submitButton.disabled = false;
+    submitButton.innerHTML = originalButtonText;
+
+  }, 2000); // Simulate 2 second delay
+}
+
+// Show form messages
+function showFormMessage(type, message) {
+  const messagesContainer = document.getElementById('form-messages');
+  if (!messagesContainer) return;
+
+  messagesContainer.innerHTML = `
+    <div class="form-message ${type}">
+      <i class="bi bi-${type === 'success' ? 'check-circle' : 'exclamation-triangle'} me-2"></i>
+      ${message}
+    </div>
+  `;
+
+  // Auto-hide success messages after 5 seconds
+  if (type === 'success') {
+    setTimeout(() => {
+      messagesContainer.innerHTML = '';
+    }, 5000);
+  }
+}
+
+// Smooth scroll for CTA buttons
+function initContactPageScrolling() {
+  const ctaButton = document.querySelector('a[href="#contactForm"]');
+  if (ctaButton) {
+    ctaButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        // Focus on first input after scroll
+        setTimeout(() => {
+          const firstInput = contactForm.querySelector('input');
+          if (firstInput) firstInput.focus();
+        }, 500);
+      }
+    });
+  }
+}
+
 // Event listeners
 window.addEventListener('scroll', handleScroll);
-window.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
+window.addEventListener('DOMContentLoaded', function() {
+  handleDOMContentLoaded();
+  initContactForm();
+  initContactPageScrolling();
+});
 window.addEventListener('load', handleLoad);
