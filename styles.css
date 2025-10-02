@@ -265,6 +265,9 @@ html {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: gradient-move 3s ease-in-out infinite alternate;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 
 @keyframes gradient-move {
@@ -841,11 +844,14 @@ html {
   }
   
   .hero h1 {
-    font-size: 1.9rem;
+    font-size: 1.7rem;
     margin-bottom: 1rem;
-    line-height: 1.2;
+    line-height: 1.15;
     word-wrap: break-word;
+    overflow-wrap: anywhere;
     hyphens: auto;
+    white-space: normal;
+    max-width: 100%;
   }
   
   .hero h2 {
@@ -854,10 +860,11 @@ html {
   }
   
   .hero-content {
-    max-width: 95%;
-    padding: 0 0.5rem;
-    width: 100%;
+    max-width: 100%;
+    padding: 0 0.75rem;
+    width: calc(100vw - 1.5rem);
     box-sizing: border-box;
+    overflow-wrap: anywhere;
   }
   
   /* CTA Button Mobile */
@@ -974,11 +981,14 @@ html {
 /* Extra Small Mobile Styles */
 @media (max-width: 480px) {
   .hero h1 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     line-height: 1.1;
     word-wrap: break-word;
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
     hyphens: auto;
+    white-space: normal;
+    max-width: 100%;
+    letter-spacing: 1px;
   }
   
   .hero h2 {
@@ -1068,7 +1078,7 @@ html {
 /* Contact Hero Section */
 .hero.hero-contact {
   padding: 64px 0 32px 0;
-  background: linear-gradient(135deg, #1B4F3C 0%, #2ECC71 100%);
+  background: #000000;
   min-height: 60vh;
 }
 
@@ -1304,12 +1314,47 @@ html {
   }
 }
 
+/* Common Mobile Device Breakpoint */
+@media (max-width: 414px) {
+  .hero h1 {
+    font-size: 1.3rem !important;
+    line-height: 1.1 !important;
+    letter-spacing: 0.5px !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+  }
+  
+  .hero-content {
+    max-width: 100%;
+    padding: 0 1rem;
+    width: calc(100vw - 2rem);
+  }
+}
+
+/* iPhone SE and very narrow screens */
+@media (max-width: 375px) {
+  .hero h1 {
+    font-size: 1.25rem !important;
+    line-height: 1.1 !important;
+    letter-spacing: 0.3px !important;
+  }
+  
+  .hero-content {
+    padding: 0 0.75rem;
+    width: calc(100vw - 1.5rem);
+  }
+}
+
 /* Extra Small Mobile for very narrow screens */
 @media (max-width: 360px) {
   .hero h1 {
-    font-size: 1.4rem !important;
+    font-size: 1.2rem !important;
     line-height: 1.1 !important;
     margin-bottom: 0.8rem !important;
+    letter-spacing: 0.5px !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
   }
   
   .hero h2 {
@@ -1318,11 +1363,12 @@ html {
   }
   
   .hero-content {
-    max-width: 98%;
-    padding: 0 0.25rem;
+    max-width: 100%;
+    padding: 0 0.5rem;
+    width: calc(100vw - 1rem);
   }
   
   .hero {
-    padding: 1.5rem 0.5rem;
+    padding: 1.5rem 0.25rem;
   }
 }
